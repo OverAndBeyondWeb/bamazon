@@ -11,4 +11,15 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId + "\n");
+
+  showProducts();
 });
+
+function showProducts() {
+  connection.query(
+    'SELECT * FROM products',
+    function(err, data) {
+      console.log(data);
+    }
+  );
+}
