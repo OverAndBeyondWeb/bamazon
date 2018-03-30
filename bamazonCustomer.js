@@ -42,12 +42,12 @@ function userProductRequest() {
       'SELECT * FROM products WHERE item_id = ' + answers.product_id,
       function(err, data) {
         var product = data[0];
-        console.log(product.stock_quantity);
-        // if (answers.quantity > product.stock_quantity) {
-        //   console.log('Insufficient Quantity');
-        // } else {
-        //   console.log('Here you go!');
-        // }
+
+        if (answers.quantity > product.stock_quantity) {
+          console.log('Insufficient Quantity');
+        } else {
+          console.log('Here you go!');
+        }
       }
     );
   });
