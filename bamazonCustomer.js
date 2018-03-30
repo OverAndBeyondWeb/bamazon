@@ -37,7 +37,6 @@ function userProductRequest() {
       name: 'quantity'
     }
   ]).then(function(answers) {
-    console.log(answers);
     connection.query(
       'SELECT * FROM products WHERE item_id = ' + answers.product_id,
       function(err, data) {
@@ -46,6 +45,12 @@ function userProductRequest() {
         if (answers.quantity > product.stock_quantity) {
           console.log('Insufficient Quantity');
         } else {
+          var newQuantity = product.stock_quantity - answers.quantity;
+
+          console.log(newQuantity);
+          connection.query(
+            'UPDATE products SET stock_quantity=' + newQuantity + ' WHERE item_id = ' + answers.product_id
+          );
           console.log('Here you go!');
         }
       }
