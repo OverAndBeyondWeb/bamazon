@@ -44,14 +44,14 @@ function userProductRequest() {
 
         if (answers.quantity > product.stock_quantity) {
           console.log('Insufficient Quantity');
+          userProductRequest();
         } else {
           var newQuantity = product.stock_quantity - answers.quantity;
-
-          console.log(newQuantity);
           connection.query(
             'UPDATE products SET stock_quantity=' + newQuantity + ' WHERE item_id = ' + answers.product_id
           );
           console.log('Here you go!');
+          connection.end();
         }
       }
     );
